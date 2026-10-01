@@ -3,17 +3,18 @@
 Moodle activity for allocating seminar, project, laboratory or presentation topics with a fixed number of places per
 topic.
 
-## Main features
+## How it works
 
-- Teacher creates any number of topics and defines the maximum number of students for each topic.
-- Topics automatically stop accepting selections when they reach capacity.
-- Concurrency-safe selection using Moodle's Lock API, preventing two users from taking the same final place.
-- Optional student topic changes.
-- Optional open and close dates.
-- Real-time teacher report with capacity, occupied places and enrolled students.
-- Activity completion when the student selects a topic.
-- Privacy API and backup/restore support.
+The teacher creates the available topics and defines the maximum number of students for each one. Students choose a
+topic while places are available, and a topic automatically stops accepting selections when its capacity is reached.
 
-## Compatibility
+Selection is protected with Moodle's Lock API so two students cannot take the same final place at the same time.
+Teachers can optionally allow students to change their choice and can define opening and closing dates.
 
-Moodle 4.5 or later.
+## Teacher view
+
+The teacher report shows capacity, occupied places and enrolled students for each topic in real time. Activity completion
+can be tied to making a topic selection.
+
+The activity also preserves its configuration and selections through backup and restore and exposes stored user data
+through Moodle's Privacy API.
