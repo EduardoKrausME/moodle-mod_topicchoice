@@ -22,6 +22,9 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+use mod_topicchoice\choice_manager;
+use mod_topicchoice\event\course_module_viewed;
+
 require_once(__DIR__ . "/../../config.php");
 
 $id = required_param("id", PARAM_INT);
@@ -34,9 +37,9 @@ require_course_login($course, true, $cm);
 require_capability("mod/topicchoice:view", context_module::instance($cm->id));
 
 $context = context_module::instance($cm->id);
-$manager = new \mod_topicchoice\choice_manager($topicchoice, $cm, $course);
+$manager = new choice_manager($topicchoice, $cm, $course);
 
-$event = \mod_topicchoice\event\course_module_viewed::create([
+$event = course_module_viewed::create([
     "objectid" => $topicchoice->id,
     "context" => $context,
 ]);

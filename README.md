@@ -1,6 +1,7 @@
 # mod_topicchoice
 
-Moodle activity for allocating seminar, project, laboratory or presentation topics with a fixed number of places per topic.
+Moodle activity for allocating seminar, project, laboratory or presentation topics with a fixed number of places per
+topic.
 
 ## Main features
 

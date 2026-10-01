@@ -22,7 +22,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('MOODLE_INTERNAL') || die;
 
 require_once("{$CFG->dirroot}/course/moodleform_mod.php");
 
@@ -62,9 +62,9 @@ class mod_topicchoice_mod_form extends moodleform_mod {
 
         if ($this->_instance) {
             $repeatno = $DB->count_records("topicchoice_topics", [
-                "topicchoiceid" => $this->_instance,
-                "active" => 1,
-            ]) + 2;
+                    "topicchoiceid" => $this->_instance,
+                    "active" => 1,
+                ]) + 2;
         } else {
             $repeatno = 5;
         }

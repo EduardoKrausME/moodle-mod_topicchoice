@@ -24,10 +24,13 @@
 
 namespace mod_topicchoice\event;
 
+use core\event\base;
+use moodle_url;
+
 /**
  * Class response_updated.
  */
-class response_updated extends \core\event\base {
+class response_updated extends base {
     /**
      * Method init.
      *
@@ -61,9 +64,9 @@ class response_updated extends \core\event\base {
     /**
      * Method get_url.
      *
-     * @return \moodle_url Return value.
+     * @return moodle_url Return value.
      */
-    public function get_url(): \moodle_url {
-        return new \moodle_url("/mod/topicchoice/view.php", ["id" => $this->contextinstanceid]);
+    public function get_url(): moodle_url {
+        return new moodle_url("/mod/topicchoice/view.php", ["id" => $this->contextinstanceid]);
     }
 }

@@ -24,6 +24,8 @@
 
 namespace mod_topicchoice\privacy;
 
+use context;
+use context_module;
 use core_privacy\local\metadata\collection;
 use core_privacy\local\request\approved_contextlist;
 use core_privacy\local\request\approved_userlist;
@@ -38,9 +40,9 @@ use core_privacy\local\request\writer;
  * Class provider.
  */
 class provider implements
-        \core_privacy\local\metadata\provider,
-        plugin_provider,
-        core_userlist_provider {
+    \core_privacy\local\metadata\provider,
+    plugin_provider,
+    core_userlist_provider {
 
     /**
      * Method get_metadata.
@@ -90,7 +92,7 @@ class provider implements
      */
     public static function get_users_in_context(userlist $userlist): void {
         $context = $userlist->get_context();
-        if (!$context instanceof \context_module) {
+        if (!$context instanceof context_module) {
             return;
         }
 
@@ -114,7 +116,7 @@ class provider implements
 
         $userid = $contextlist->get_user()->id;
         foreach ($contextlist->get_contexts() as $context) {
-            if (!$context instanceof \context_module) {
+            if (!$context instanceof context_module) {
                 continue;
             }
             $cm = get_coursemodule_from_id("topicchoice", $context->instanceid);
@@ -144,13 +146,13 @@ class provider implements
     /**
      * Method delete_data_for_all_users_in_context.
      *
-     * @param \context $context Parameter context.
+     * @param context $context Parameter context.
      * @return void Return value.
      */
-    public static function delete_data_for_all_users_in_context(\context $context): void {
+    public static function delete_data_for_all_users_in_context(context $context): void {
         global $DB;
 
-        if (!$context instanceof \context_module) {
+        if (!$context instanceof context_module) {
             return;
         }
         $cm = get_coursemodule_from_id("topicchoice", $context->instanceid);
@@ -170,7 +172,7 @@ class provider implements
 
         $userid = $contextlist->get_user()->id;
         foreach ($contextlist->get_contexts() as $context) {
-            if (!$context instanceof \context_module) {
+            if (!$context instanceof context_module) {
                 continue;
             }
             $cm = get_coursemodule_from_id("topicchoice", $context->instanceid);
@@ -193,7 +195,7 @@ class provider implements
         global $DB;
 
         $context = $userlist->get_context();
-        if (!$context instanceof \context_module) {
+        if (!$context instanceof context_module) {
             return;
         }
         $cm = get_coursemodule_from_id("topicchoice", $context->instanceid);

@@ -25,7 +25,10 @@
 namespace mod_topicchoice;
 
 use completion_info;
+use context_module;
 use core\lock\lock_config;
+use mod_topicchoice\event\response_created;
+use mod_topicchoice\event\response_updated;
 use moodle_exception;
 use moodle_url;
 use stdClass;
@@ -274,9 +277,9 @@ class choice_manager {
                 $response->topicid = $topicid;
                 $response->timemodified = $now;
                 $DB->update_record("topicchoice_responses", $response);
-                $event = \mod_topicchoice\event\response_updated::create([
+                $event = response_updated::create([
                     "objectid" => $response->id,
-                    "context" => \context_module::instance($this->cm->id),
+                    "context" => context_module::instance($this->cm->id),
                     "relateduserid" => $userid,
                     "other" => ["topicid" => $topicid],
                 ]);
@@ -289,9 +292,9 @@ class choice_manager {
                     "timemodified" => $now,
                 ];
                 $response->id = $DB->insert_record("topicchoice_responses", $response);
-                $event = \mod_topicchoice\event\response_created::create([
+                $event = response_created::create([
                     "objectid" => $response->id,
-                    "context" => \context_module::instance($this->cm->id),
+                    "context" => context_module::instance($this->cm->id),
                     "relateduserid" => $userid,
                     "other" => ["topicid" => $topicid],
                 ]);

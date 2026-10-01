@@ -33,13 +33,16 @@
                 <div class="topicchoice-card-body">
                     <h3 class="h5 mb-2">{{{name}}}</h3>
                     {{#showavailability}}
-                        <div class="text-muted small mb-3">{{availabilitylabel}}: {{available}} / {{maxstudents}} {{placeslabel}}</div>
+                        <div class="text-muted small mb-3">{{availabilitylabel}}: {{available}}
+                            / {{maxstudents}} {{placeslabel}}</div>
                     {{/showavailability}}
                     <form method="post" action="{{action}}" class="mb-0">
                         <input type="hidden" name="id" value="{{cmid}}">
                         <input type="hidden" name="topicid" value="{{id}}">
                         <input type="hidden" name="sesskey" value="{{sesskey}}">
-                        <button type="submit" class="btn {{#chosen}}btn-success{{/chosen}}{{^chosen}}btn-primary{{/chosen}}" {{#disabled}}disabled{{/disabled}}>
+                        <button type="submit"
+                                class="btn {{#chosen}}btn-success{{/chosen}}{{^chosen}}btn-primary{{/chosen}}"
+                                {{#disabled}}disabled{{/disabled}}>
                             {{buttontext}}
                         </button>
                     </form>

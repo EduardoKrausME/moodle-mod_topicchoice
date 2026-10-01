@@ -24,10 +24,13 @@
 
 namespace mod_topicchoice\event;
 
+use core\event\base;
+use moodle_url;
+
 /**
  * Class report_viewed.
  */
-class report_viewed extends \core\event\base {
+class report_viewed extends base {
     /**
      * Method init.
      *
@@ -60,9 +63,9 @@ class report_viewed extends \core\event\base {
     /**
      * Method get_url.
      *
-     * @return \moodle_url Return value.
+     * @return moodle_url Return value.
      */
-    public function get_url(): \moodle_url {
-        return new \moodle_url("/mod/topicchoice/report.php", ["id" => $this->contextinstanceid]);
+    public function get_url(): moodle_url {
+        return new moodle_url("/mod/topicchoice/report.php", ["id" => $this->contextinstanceid]);
     }
 }

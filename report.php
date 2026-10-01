@@ -22,6 +22,9 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+use mod_topicchoice\choice_manager;
+use mod_topicchoice\event\report_viewed;
+
 require_once(__DIR__ . "/../../config.php");
 require_once($CFG->libdir . "/tablelib.php");
 
@@ -40,11 +43,11 @@ $PAGE->set_title(get_string("report", "topicchoice"));
 $PAGE->set_heading(format_string($course->fullname));
 $PAGE->set_context($context);
 
-$manager = new \mod_topicchoice\choice_manager($topicchoice, $cm, $course);
+$manager = new choice_manager($topicchoice, $cm, $course);
 $topics = $manager->get_topics(true);
 $counts = $manager->get_counts();
 
-$event = \mod_topicchoice\event\report_viewed::create([
+$event = report_viewed::create([
     "objectid" => $topicchoice->id,
     "context" => $context,
 ]);
