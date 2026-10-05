@@ -48,9 +48,12 @@ class backup_topicchoice_activity_structure_step extends backup_activity_structu
 
         $topicchoice->set_source_table("topicchoice", ["id" => backup::VAR_ACTIVITYID]);
         $topic->set_source_table("topicchoice_topics", ["topicchoiceid" => backup::VAR_PARENTID]);
-        $response->set_source_table("topicchoice_responses", ["topicid" => backup::VAR_PARENTID]);
 
-        $response->annotate_ids("user", "userid");
+        if ($this->get_setting_value("userinfo")) {
+            $response->set_source_table("topicchoice_responses", ["topicid" => backup::VAR_PARENTID]);
+            $response->annotate_ids("user", "userid");
+        }
+
         $topicchoice->annotate_files("mod_topicchoice", "intro", null);
 
         return $this->prepare_activity_structure($topicchoice);
