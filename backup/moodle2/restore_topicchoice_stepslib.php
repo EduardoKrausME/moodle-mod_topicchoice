@@ -48,6 +48,8 @@ class restore_topicchoice_activity_structure_step extends restore_activity_struc
 
         $data = (object)$data;
         $data->course = $this->get_courseid();
+        $data->timeopen = $this->apply_date_offset($data->timeopen);
+        $data->timeclose = $this->apply_date_offset($data->timeclose);
         $newitemid = $DB->insert_record("topicchoice", $data);
         $this->apply_activity_instance($newitemid);
     }
