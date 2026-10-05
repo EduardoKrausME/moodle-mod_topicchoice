@@ -36,10 +36,58 @@ function topicchoice_supports($feature) {
         FEATURE_SHOW_DESCRIPTION => true,
         FEATURE_COMPLETION_TRACKS_VIEWS => true,
         FEATURE_COMPLETION => true,
+        FEATURE_COMPLETION_HAS_RULES => true,
         FEATURE_BACKUP_MOODLE2 => true,
         FEATURE_MOD_PURPOSE => MOD_PURPOSE_COLLABORATION,
         default => null,
     };
+}
+
+/**
+ * Returns cached course-module information, including custom completion rules.
+ *
+ * @param stdClass $coursemodule Course module record.
+ * @return cached_cm_info|null
+ */
+function topicchoice_get_coursemodule_info($coursemodule) {
+    global $DB;
+
+    $topicchoice = $DB->get_record(
+        "topicchoice",
+        ["id" => $coursemodule->instance],
+        "id, name, intro, introformat, completionsubmit"
+    );
+    if (!$topicchoice) {
+        return null;
+    }
+
+    $info = new cached_cm_info();
+    $info->name = $topicchoice->name;
+
+    if ($coursemodule->showdescription) {
+        $info->content = format_module_intro("topicchoice", $topicchoice, $coursemodule->id, false);
+    }
+
+    if ((int)$coursemodule->completion === COMPLETION_TRACKING_AUTOMATIC) {
+        $info->customdata["customcompletionrules"]["completionsubmit"] = (int)$topicchoice->completionsubmit;
+    }
+
+    return $info;
+}
+
+/**
+ * Returns descriptions of the active custom completion rules.
+ *
+ * @param cm_info|stdClass $cm Course module information.
+ * @return array
+ */
+function topicchoice_get_completion_active_rule_descriptions($cm): array {
+    if ((int)$cm->completion !== COMPLETION_TRACKING_AUTOMATIC ||
+            empty($cm->customdata["customcompletionrules"]["completionsubmit"])) {
+        return [];
+    }
+
+    return [get_string("completiondetail:submit", "topicchoice")];
 }
 
 /**
