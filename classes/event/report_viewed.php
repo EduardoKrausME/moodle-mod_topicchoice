@@ -43,6 +43,18 @@ class report_viewed extends base {
     }
 
     /**
+     * Returns the mapping for the activity object id when restoring logs.
+     *
+     * @return array
+     */
+    public static function get_objectid_mapping(): array {
+        return [
+            "db" => "topicchoice",
+            "restore" => "topicchoice",
+        ];
+    }
+
+    /**
      * Method get_name.
      *
      * @return string Return value.
