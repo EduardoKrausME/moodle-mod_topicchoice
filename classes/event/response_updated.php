@@ -43,6 +43,32 @@ class response_updated extends base {
     }
 
     /**
+     * Returns the mapping for the response object id when restoring logs.
+     *
+     * @return array
+     */
+    public static function get_objectid_mapping(): array {
+        return [
+            "db" => "topicchoice_responses",
+            "restore" => self::NOT_MAPPED,
+        ];
+    }
+
+    /**
+     * Returns mappings for values stored in the other event data.
+     *
+     * @return array
+     */
+    public static function get_other_mapping(): array {
+        return [
+            "topicid" => [
+                "db" => "topicchoice_topics",
+                "restore" => "topicchoice_topic",
+            ],
+        ];
+    }
+
+    /**
      * Method get_name.
      *
      * @return string Return value.
