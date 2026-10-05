@@ -67,4 +67,22 @@ class restore_topicchoice_activity_task extends restore_activity_task {
             new restore_decode_rule("TOPICCHOICEINDEX", "/mod/topicchoice/index.php?id=$1", "course"),
         ];
     }
+
+    /**
+     * Defines restore log rules for this activity.
+     *
+     * @return array Return value.
+     */
+    public static function define_restore_log_rules(): array {
+        return [];
+    }
+
+    /**
+     * Defines restore log rules for course-level logs.
+     *
+     * @return array Return value.
+     */
+    public static function define_restore_log_rules_for_course(): array {
+        return [];
+    }
 }
