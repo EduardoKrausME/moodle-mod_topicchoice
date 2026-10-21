@@ -155,7 +155,7 @@ class mod_topicchoice_mod_form extends moodleform_mod {
             }
 
             $validtopics++;
-            $key = core_text::strtolower($name);
+            $key = strtolower($name);
             if (isset($seen[$key])) {
                 $errors["topic[{$index}]"] = get_string("duplicatetopic", "topicchoice");
             }
